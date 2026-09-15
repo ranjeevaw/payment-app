@@ -8,7 +8,7 @@ const VERIFY_PAYMENT_URL =
   "https://us-central1-englishdhammaorg.cloudfunctions.net/getCheckoutSession";
 
 const APPOINTMENTS_URL =
-  "https://ranjeevaw.github.io/appointments-app/#/alms-calendar";
+  "https://ranjeevaw.github.io/appointments-app/#/appointment/new";
 
 function App() {
   const [amount, setAmount] = useState("");
@@ -207,9 +207,18 @@ function App() {
             <button
               type="button"
               className="pay-button"
-              onClick={() => {
-                window.location.href = APPOINTMENTS_URL;
-              }}
+onClick={() => {
+  const returnUrl =
+    `${APPOINTMENTS_URL}?paymentId=${encodeURIComponent(
+      payment.paymentId
+    )}&paymentSessionId=${encodeURIComponent(
+      payment.paymentSessionId
+    )}&amount=${encodeURIComponent(
+      payment.paymentAmount
+    )}`;
+
+  window.location.href = returnUrl;
+}}
             >
               Continue to Appointments
             </button>
@@ -232,48 +241,67 @@ function App() {
           Make a Payment
         </p>
 
-        <form onSubmit={handlePayment}>
-          <label htmlFor="amount">
-            Payment amount
-          </label>
+<div className="donation-notice">
+  <h2>Temple Donation Notice</h2>
 
-          <div className="amount-input">
-            <span>$</span>
+  <p>
+    Please note that the daily running cost of the English Dhamma Temple
+    is <strong>$295</strong>.
+  </p>
 
-            <input
-              id="amount"
-              type="number"
-              min="100"
-              max="10000"
-              step="0.01"
-              value={amount}
-              onChange={(event) => setAmount(event.target.value)}
-              placeholder="100.00"
-              disabled={loading}
-            />
-          </div>
+  <p>
+    Therefore, when making an appointment with the Reverend of the Temple,
+    please make a <strong>donation of $100 or more</strong> before proceeding
+    with your appointment.
+  </p>
 
-          {error && (
-            <div className="error-message">
-              {error}
-            </div>
-          )}
+  <p>
+    Thank you for your generous support of the English Dhamma Temple.
+  </p>
+</div>
 
-          <button
-            type="submit"
-            className="pay-button"
-            disabled={loading}
-          >
-            {loading ? "Preparing payment..." : "Pay by Card"}
-          </button>
-        </form>
+<form onSubmit={handlePayment}>
+  <label htmlFor="amount">
+    Payment amount
+  </label>
 
-        <div className="secure-payment">
-          <span>🔒</span>
-          <span>Secure payment powered by Stripe</span>
-        </div>
-      </main>
+  <div className="amount-input">
+    <span>$</span>
+
+    <input
+      id="amount"
+      type="number"
+      min="100"
+      max="10000"
+      step="0.01"
+      value={amount}
+      onChange={(event) => setAmount(event.target.value)}
+      placeholder="100.00"
+      disabled={loading}
+    />
+  </div>
+
+  {error && (
+    <div className="error-message">
+      {error}
     </div>
+  )}
+
+  <button
+    type="submit"
+    className="pay-button"
+    disabled={loading}
+  >
+    {loading ? "Preparing payment..." : "Pay by Card"}
+  </button>
+</form>
+
+<div className="secure-payment">
+  <span>🔒</span>
+  <span>Secure payment powered by Stripe</span>
+</div>
+</main>
+</div>
   );
 }
 

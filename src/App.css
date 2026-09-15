@@ -227,3 +227,29 @@
   font-size: 15px;
   word-break: break-all;
 }
+
+.donation-notice {
+  margin: 24px 0;
+  padding: 18px;
+  border-radius: 10px;
+  background: #fff8e1;
+  border: 1px solid #f0d98c;
+  text-align: left;
+}
+
+.donation-notice h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #333333;
+}
+
+.donation-notice p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444444;
+}
+
+.donation-notice strong {
+  font-weight: 700;
+}

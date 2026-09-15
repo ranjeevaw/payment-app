@@ -57,11 +57,11 @@ exports.createCheckoutSession = onRequest(
             },
           ],
 
-          success_url:
-            "https://ranjeevaw.github.io/payment-app/?payment_session_id={CHECKOUT_SESSION_ID}",
+success_url:
+  "https://ranjeevaw.github.io/payment-app/?payment_session_id={CHECKOUT_SESSION_ID}",
 
-          cancel_url:
-            "https://ranjeevaw.github.io/appointments-app/#/alms-calendar",
+cancel_url:
+  "https://ranjeevaw.github.io/payment-app/",
 
           metadata: {
             paymentAmount: amount.toFixed(2),
